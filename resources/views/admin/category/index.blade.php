@@ -3,6 +3,7 @@
 @section('content')
 
 <!-- TODO : Show Parent Field and fetch based on Parent Id from Category Table -->
+<!-- TODO : Categories Add, Edit Functionality to be completed. -->
 
 <style>
     label {
