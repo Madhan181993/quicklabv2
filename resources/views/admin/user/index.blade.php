@@ -25,10 +25,12 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>User Code</th>
-                    <th>User Name</th>
-                    <th>User Email</th>
-                    <th>User Phone</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Type</th>
+
                     <th>Action</th>
                 </tr>
             </thead>
@@ -40,6 +42,8 @@
                     <td>{{ $user->userfirstname.' '.$user->userlastname }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->userphone }}</td>
+                    <td >{{ $user->userrole == "1" ? "Admin" : "Partner"}}</td>
+
                     <td>
                         <button href="#" value="{{ $user->id }}" class="editbtn"><i class="far fa-edit"></i></button>
                         <button onclick="deleteUser()" class="deletebtn"><i class="far fa-trash-alt"></i></button>
@@ -169,10 +173,11 @@
                                 </div>
                                 <div class="col-md-6  mb-2">
                                     <label for="">User Role</label>
+                                    <!-- 1:Admin, 2:Partner, 3:Customer -->
                                     <select name="userrole" id="userrole">
                                         <option value="">Please select role</option>
-                                        <option value="2">Customer</option>
-                                        <option value="3">Partner</option>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Partner</option>
                                     </select>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>

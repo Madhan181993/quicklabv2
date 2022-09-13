@@ -16,7 +16,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        $usersList = User::where('userrole','=','1')
+        // 1:Admin, 2:Partner, 3:User
+        $userIds =[1,2];
+        // $usersList = User::where('userrole','=','1')
+        $usersList = User::whereIn('userrole',$userIds)
         ->where('deleted_status',0)
         ->get();
         // $usersList = User::where('deleted_status',0)
@@ -26,10 +29,11 @@ class UserController extends Controller
     }
 
 
-    public function add()
-    {
-        return view('admin.category.add');
-    }
+    // TODO : Remove this function if not used.
+    // public function add()
+    // {
+    //     return view('admin.category.add');
+    // }
 
     public function addUser(Request $request)
     {
