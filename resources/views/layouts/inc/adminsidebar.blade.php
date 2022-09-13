@@ -46,14 +46,14 @@
                             <!-- <span class="submenu-icon ml-auto"></span> -->
                         </div>
                     </a>
-                    <a href="{{ url('company-settings') }}" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="{{ url('admin/company-settings') }}" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-building fa-fw mr-3"></span>
                             <span class="menu-collapsed">Company</span>
                             <!-- <span class="submenu-icon ml-auto"></span> -->
                         </div>
                     </a>
-                    <a href="{{ url('users') }}" class="bg-dark list-group-item list-group-item-action">
+                    <a href="{{ url('admin/users') }}" class="bg-dark list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-users fa-fw mr-3"></span>
                             <span class="menu-collapsed">User Management</span>

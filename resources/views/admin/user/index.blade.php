@@ -101,18 +101,11 @@
                                     <input type="email" class="form-control" name="email" required>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-
                                 <div class="col-md-4  mb-2">
                                     <label for="">Email 1</label>
                                     <input type="email" class="form-control" name="useremail1">
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <div class="col-md-4  mb-2">
-                                    <label for="">Email 2</label>
-                                    <input type="email" class="form-control" name="useremail2">
-                                    <div class="alert alert-danger" style="display:none"></div>
-                                </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-4  mb-2">
@@ -343,7 +336,7 @@
         function deleteUser(id) {
             $.ajax({
                 type: "POST",
-                url: "{{route('delete-user')}}",
+                url: "{{route('admin.delete-user')}}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "user_id": id
@@ -366,7 +359,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{route('edit-user')}}",
+                url: "{{route('admin.edit-user')}}",
                 data: {
                     "_token": "{{ csrf_token() }}",
                     "user_id": user_id

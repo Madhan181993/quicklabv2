@@ -32,7 +32,6 @@ class User extends Authenticatable
         'usermobile1',
         'usermobile2',
         'useremail1',
-        'useremail2',
         'useraddress1',
         'useraddress2',
         'usercity',

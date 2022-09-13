@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
@@ -14,6 +15,25 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function login(Request $request){
+
+        $request->validate([
+            'email'=>'required|email',
+            'password'=>'required|min:8'
+        ]);
+        $check = $request->only('email', 'password');
+        if(Auth::guard('admin')->attempt($check)){
+            return redirect('admin/dashboard')->with('status','Welcome to your dashboard');
+        }else{
+            return redirect()->back()->with('error', 'Login Failed');
+        }
+    }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect('admin/login')->with('status','Logged out successfully');
+    }
     public function index()
     {
         // 1:Admin, 2:Partner, 3:User
@@ -50,7 +70,6 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|max:100',
             'useremail1' => 'nullable|email',
-            'useremail2' => 'nullable|email',
             'useraddress1' => 'required',
             'useraddress2' => 'nullable',
             'usercity' => 'required',
@@ -59,8 +78,6 @@ class UserController extends Controller
             'userpincode' => 'required',
             'userrole' => 'required|numeric',
         ]);
-
-        //echo $request->usercode;die;
 
         try{
 
@@ -77,7 +94,6 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'useremail1' => $request->useremail1,
-                'useremail2' => $request->useremail2,
                 'usercity' => $request->usercity,
                 'userstate' => $request->userstate,
                 'usercountry' => $request->usercountry,
@@ -104,7 +120,7 @@ class UserController extends Controller
 
     public function updateUser(Request $request)
     {
-    //echo "<pre>";print_r($request->input());die;
+        //echo "<pre>";print_r($request->input());die;
         $userId = $request->input('user_id');
         $user = User::find($userId);
         
@@ -119,13 +135,12 @@ class UserController extends Controller
         $user->usermobile2 = $request->input('usermobile2');
         $user->email = $request->input('email');
         $user->useremail1 = $request->input('useremail1');
-        $user->useremail2 = $request->input('useremail2');
         $user->usercity = $request->input('usercity');
         $user->userstate = $request->input('userstate');
         $user->usercountry = $request->input('usercountry');
         $user->userpincode = $request->input('userpincode');
         $user->userstatus = $request->input('userstatus') == "on" ? '1' : '0';
-        // $user->userrole = $request->input('userrole');
+        $user->userrole = $request->input('userrole');
         $user->update();
 
         return redirect()->back()->with('status','User Updated Successfully');
@@ -137,5 +152,7 @@ class UserController extends Controller
         $user = User::find($userId);
         $user->deleted_status = 'Yes';
         $user->update();
+
+        return redirect()->back()->with('status','User Deleted Successfully');
     }
 }

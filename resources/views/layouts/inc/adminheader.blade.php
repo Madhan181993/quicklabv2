@@ -5,27 +5,27 @@
         <button class="navbar-toggler navbar-toggler-right nav_btn" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="{{ url('admin/dashboard') }}">
             <img src="{{ asset('admin/images/logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
             <span class="menu-collapsed"></span>
         </a>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item text-warning mt-2 mr-4">
-                   <span style="color:white!important;">Logged in as : </span> {{  Session::get('username') }}
+                   <span style="color:white!important;">Logged in as : </span> {{ auth()->user()->userfirstname.' '.auth()->user()->userlastname }}
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-color" href="{{ url('/dashboard') }}">Home </a>
+                    <a class="nav-link nav-color" href="{{ url('admin/dashboard') }}">Home </a>
                 </li>
                <li class="nav-item">
                      <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> -->
-                                    <a class="btn button-logout"  href="{{ route('logout') }}"
+                                    <a class="btn button-logout"  href="javascript:void(0);"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 <!-- </div> -->

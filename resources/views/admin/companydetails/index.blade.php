@@ -64,18 +64,18 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('update-company') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.update-company') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="company_id" id="company_id" value="" />
                             <div class="row">
                                 <div class="col-md-6  mb-2">
-                                    <label for="">Company Name</label>
+                                    <label for="">Company Name <span style="color:#ff0000">*</span></label>
                                     <input type="text" class="form-control" id="company_name" name="company_name" value="">
                                     <span id="nameErr" class=""></span>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="">Company Address1</label>
+                                    <label for="">Company Address1 <span style="color:#ff0000">*</span></label>
                                     <input type="text" class="form-control" id="company_address1" name="company_address1" value="">
                                     <!-- <textarea name="company_address1" id="company_address1" cols="30" rows="3" class="form-control mb-2" placeholder="Company Address1"></textarea> -->
                                     <span id="addressErr" class=""></span>
@@ -86,36 +86,36 @@
                                     <!-- <textarea name="company_address2" id="company_address2" cols="30" rows="3" class="form-control mb-2" placeholder="Company Address2"></textarea> -->
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company City&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_city" id="company_city" value="">
+                                    <label for="" class="">Company City&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_city" id="company_city" value="">
                                     <span id="cityErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company State&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_state" id="company_state" value="">
+                                    <label for="" class="">Company State&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_state" id="company_state" value="">
                                     <span id="stateErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company Pincode&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_pincode" id="company_pincode" value="">
+                                    <label for="" class="">Company Pincode&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_pincode" id="company_pincode" value="">
                                     <span id="pincodeErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company Phone&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_phone" id="company_phone" value="">
+                                    <label for="" class="">Company Phone&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_phone" id="company_phone" value="">
                                     <span id="phoneErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company Mobile1&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_mobile1" id="company_mobile1" value="">
+                                    <label for="" class="">Company Mobile1&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_mobile1" id="company_mobile1" value="">
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="" class="">Company Mobile2&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_mobile2" id="company_mobile2" value="">
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company Email1&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_email1" id="company_email1" value="">
+                                    <label for="" class="">Company Email1&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_email1" id="company_email1" value="">
                                     <span id="emailErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="" class="">Company Email2&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_email2" id="company_email2" value="">
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company Website&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_website" id="company_website" value="">
+                                    <label for="" class="">Company Website&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_website" id="company_website" value="">
                                     <span id="websiteErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
@@ -123,7 +123,7 @@
                                     <span id="gstErr" class=""></span>
                                 </div>
                                 <div class="col-md-4 mb-2">
-                                    <label for="" class="">Company IEC No&nbsp;&nbsp;</label><input type="text" class="form-control" name="company_iecno" id="company_iecno" value="">
+                                    <label for="" class="">Company IEC No&nbsp;&nbsp;<span style="color:#ff0000">*</span></label><input type="text" class="form-control" name="company_iecno" id="company_iecno" value="">
                                     <span id="iecNoErr" class=""></span>
                                 </div>
 
@@ -161,7 +161,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{route('edit-company')}}",
+                url: "{{route('admin.edit-company')}}",
                 data   : {"_token": "{{ csrf_token() }}", "company_id":company_id},
                 success: function(response) {
                     //console.log(response);return false;
@@ -254,17 +254,6 @@
             $("#company_website").focus();
             return false;
         }
-        if(companyGst == ''){
-            $("#gstErr").addClass('errormsg').html("Please Enter the company GST");
-            $("#company_gstin").focus();
-            return false;
-        }
-        if(companyIecNo == ''){
-            $("#iecNoErr").addClass('errormsg').html("Please Enter the company IEC number");
-            $("#company_iecno").focus();
-            return false;
-        }
-       
     }
         
     
