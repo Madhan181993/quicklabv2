@@ -33,7 +33,7 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     Route::get('/dashboard', 'Admin\FrontendController@index');
 
-    Route::get('categories', 'Admin\CategoryController@index');
+    Route::get('categories', [CategoryController::class,'index']);
     Route::get('add-category','Admin\CategoryController@add');
     Route::POST('insert-category','Admin\CategoryController@insert');
     Route::get('edit-category/{id}', [CategoryController::class, 'edit']);

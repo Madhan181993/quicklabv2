@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 
@@ -15,7 +16,14 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $category = Category::all();
+        // $category = Category::all();
+
+        // $category = DB::table('categories')
+        //     ->join('categories', 'categories.id', '=', 'categories.categoriesparentid')
+        //     ->get();
+
+        $query ="SELECT * FROM categories ORDER BY CASE WHEN categoriesparentid = 0 THEN id ELSE categoriesparentid END, id";
+        $category = DB::select($query);
 
         return view('admin.category.index', compact('category'));
     }
