@@ -23,6 +23,37 @@
 }
 
 
+/* Settings Feature */
+
+.table-Settings{
+  width: 70% !important;
+  margin-left:auto;
+  margin-right: auto;
+  margin-top:30px;
+}
+
+.table-settings #slno {
+  color: red !important;;
+}
+/* Category Feature */
+.category-head{
+  width:30%;
+
+}
+.parent-category{
+  margin-left: 30px;
+  border:1px solid black;
+  font-weight: bold;
+}
+
+.child-category{
+  margin-left:30px;
+  padding-left: 30px;
+  border:1px solid black;
+}
+
+
+/* End Category Feature */
 
 .card-header {
   padding : 2px 2px!important;

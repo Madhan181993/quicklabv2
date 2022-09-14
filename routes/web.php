@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminProfileController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -7,6 +9,7 @@ use App\Http\Controllers\Admin\TaxController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\FrontendController;
 use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +31,26 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//test start
+
+Route::get('categories', function() {
+    return view ('admin.category.index', [
+        'categories' => Category::tree(),
+    ]);
+})->name('index');
+
+
+//test end
+
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     Route::get('/dashboard', 'Admin\FrontendController@index');
 
-    Route::get('categories', [CategoryController::class,'index']);
+    // Route::get('categories', [CategoryController::class,'index']);
+
+
+    // Route::get('categories', [CategoryController::class,'index']);
     Route::get('add-category','Admin\CategoryController@add');
     Route::POST('insert-category','Admin\CategoryController@insert');
     Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
@@ -53,5 +70,11 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
 
     Route::get('tax', [TaxController::class,'index']);
+    Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
 
+    // Product Management Routes
+    Route::get('products', [ProductController::class,'index'])->name('products');
+
+    // Admin Profile Routes
+    Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
 });

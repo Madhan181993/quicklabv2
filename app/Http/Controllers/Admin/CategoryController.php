@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
+
+
+
+
     public function index()
     {
         // $category = Category::all();

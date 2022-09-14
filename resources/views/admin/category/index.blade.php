@@ -10,52 +10,35 @@
         font-size: 14px;
         font-weight: 500;
     }
-    input[type="text"],input[type="email"],input[type="password"]{
-        height:30px;
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        height: 30px;
     }
 </style>
+<div class="row">
+    <div class="category-head flex-container">
+        @foreach($categories as $category)
 
-@if (session('status'))
-<div class="alert alert-success">{{ session('status') }}</div>
-@endif
+        <div class="parent-category flex-child">{{ $category->categoriesname }}</div>
+        <div class="">{{ $category->categoriesdescription }}</div>
+        <div class="">{{ $category->status }}</div>
 
-<h4>Category Page</h4>
-<div class="card">
-    <div class="card-body">
-        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Category</a>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Parent</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($category as $item)
-                <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->categoriesparentid }}</td>
-                    <td>{{ $item->categoriesname }}</td>
-                    <td>{{ $item->categoriesdescription }}</td>
-                    <td>{{ $item->status }}</td>
+        @foreach($category->children as $child)
 
-                    <td>
-                        <button href="#" value="{{ $item->id }}" class="editbtn"><i class="far fa-edit"></i></button>
-                        <button href="#" data-toggle="tooltip" title="Delete" class="deletebtn"><i class="far fa-trash-alt"></i></button>
-                        <!-- <button data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button> -->
-                        <a href=""></a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="child-category">{{ $child->categoriesname }}</div>
+
+        @endforeach
+
+        @endforeach
 
     </div>
+
 </div>
+
+
+
 
 
 <!-- Button trigger modal -->
@@ -214,23 +197,23 @@
                     $('#description').val(response.category.description);
 
                     // Setting the Checkboxes
-                    if (response.category.status){
+                    if (response.category.status) {
                         $('input[name=status]').attr('checked', true);
-                    } else{
+                    } else {
                         $('input[name=status]').attr('checked', false);
                     }
-                    if (response.category.popular){
+                    if (response.category.popular) {
                         $('input[name=popular]').attr('checked', true);
-                    } else{
+                    } else {
                         $('input[name=popular]').attr('checked', false);
                     }
-                    
+
                     $('#meta_title').val(response.category.meta_title);
                     $('#meta_keywords').val(response.category.meta_keywords);
                     $('#meta_description').val(response.category.meta_description);
                     // Showing image
-                    $("#image1").attr('src', 'assets/uploads/category/'+response.category.image);
-                    $("#image1").attr('width','200px');
+                    $("#image1").attr('src', 'assets/uploads/category/' + response.category.image);
+                    $("#image1").attr('width', '200px');
                     $("#category_id").val(category_id);
 
                 }
