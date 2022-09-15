@@ -12,14 +12,6 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'productsku',
-        'productname',
-        'productdescription',
-        'productsellingprice',
-        'productofferprice',
-        'productbatchno',
-        'productexpirydate',
-        'producthsnno',
-        'status',
+
     ];
 }
