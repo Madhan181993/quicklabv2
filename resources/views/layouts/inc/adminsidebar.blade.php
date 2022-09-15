@@ -38,8 +38,7 @@
                             <span class="menu-collapsed">Tables</span>
                         </a>
                     </div> -->
-                    <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
-                        class="bg-dark list-group-item list-group-item-action flex-column align-items-start isDisabled" >
+                    <a href="{{ url('profile') }}" class="bg-dark list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-user fa-fw mr-3"></span>
                             <span class="menu-collapsed">Profile</span>
@@ -60,13 +59,13 @@
                         </div>
                     </a>
                     <a href="#" class="bg-dark list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-start align-items-center isDisabled">
+                        <div class="d-flex w-100 justify-content-start align-items-center ">
                             <span class="fa fa-map-marker fa-fw mr-3"></span>
                             <span class="menu-collapsed">Location</span>
                         </div>
                     </a>
                     <a href="{{ url('tax') }}" class="bg-dark list-group-item list-group-item-action">
-                        <div class="d-flex w-100 justify-content-start align-items-center isDisabled">
+                        <div class="d-flex w-100 justify-content-start align-items-center ">
                             <span class="fa fa-sticky-note fa-fw mr-3"></span>
                             <span class="menu-collapsed">Tax Management</span>
                         </div>
@@ -81,8 +80,8 @@
                         </a>
                     </div> -->
 
-                    <a href="{{ url('categories') }}" class="bg-dark list-group-item list-group-item-action isDisabled">
-                        <div class="d-flex w-100 justify-content-start align-items-center isDisabled isDisabled">
+                    <a href="{{ url('products') }}" class="bg-dark list-group-item list-group-item-action ">
+                        <div class="d-flex w-100 justify-content-start align-items-center  ">
                             <span class="fa fa-shopping-basket fa-fw mr-3"></span>
                             <span class="menu-collapsed">Products</span>
                         </div>
@@ -94,8 +93,8 @@
                         </div>
                     </a>
                     </a>
-                    <a href="{{ url('categories') }}" class="bg-dark list-group-item list-group-item-action isDisabled">
-                        <div class="d-flex w-100 justify-content-start align-items-center isDisabled">
+                    <a href="{{ url('categories') }}" class="bg-dark list-group-item list-group-item-action ">
+                        <div class="d-flex w-100 justify-content-start align-items-center ">
                             <span class="fa fa-book fa-fw mr-3"></span>
                             <span class="menu-collapsed">Catalogue</span>
                         </div>

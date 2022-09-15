@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
@@ -12,14 +13,12 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
+        'category_id',
         'name',
-        'slug',
-        'description',
-        'status',
-        'popular',
-        'image',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
+        'status'
     ];
+
+    public function parent(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

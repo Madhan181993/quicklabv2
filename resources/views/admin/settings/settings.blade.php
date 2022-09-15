@@ -26,9 +26,11 @@ table.settings thead th {
 </style>
 
 <h4>Settings Management</h4>
+<table class="table table-hover table-Settings">
 
-<table class="settings">
+
     <thead>
+        <tr><th colspan="4" style="background-color:#fff!important;"><a href="#" class="btn btn-primary button1"> Edit Settings</a></th></tr>
         <tr>
             <th id="slno">#</th>
             <th>Feature</th>

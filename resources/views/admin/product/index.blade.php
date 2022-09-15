@@ -11,27 +11,31 @@
         height:30px;
     }
 </style>
-<h4>Tax Management</h4>
+<h4>Product Management</h4>
 <div class="card">
 
     <div class="card-body">
-        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Tax</a>
+        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Product</a>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>SKU</th>
                     <th>Name</th>
-                    <th>Percentage</th>
+                    <th>Selling Price</th>
+                    <th>Offer Price</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($tax as $item)
+                @foreach($product as $item)
                 <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->taxname }}</td>
-                    <td>{{ $item->taxpercentage }}</td>
+                    <td>{{ $item->productid }}</td>
+                    <td>{{ $item->productsku }}</td>
+                    <td>{{ $item->productname }}</td>
+                    <td>{{ $item->productsellingprice }}</td>
+                    <td>{{ $item->productofferprice }}</td>
                     <td>{{ $item->status }}</td>
                     <!-- <td>
                         <img src="{{ asset('assets/uploads/category/'.$item->image) }}" class="category-list-img" alt="Image Here">
@@ -61,7 +65,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Tax</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -72,33 +76,44 @@
                         <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                            <div class="col-md-6  mb-2">
-                                    <label for="">Tax Code</label>
+                            <div class="col-md-3  mb-2">
+                                    <label for="">SKU</label>
                                     <input type="text" class="form-control" name="taxcode" required>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <div class="col-md-6  mb-2">
-                                    <label for="">Name</label>
-                                    <input type="text" class="form-control" name="taxname" required>
-                                    <div class="alert alert-danger" style="display:none"></div>
-                                </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="">Tax Value</label>
-                                    <input type="text" class="form-control" name="taxvalue">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="">Tax Percentage</label>
+                                    <label for="">Product Name</label>
                                     <input type="text" class="form-control" name="taxpercentage">
                                 </div>
 
-
-
                                 <div class="col-md-12 mb-2">
-                                    <label for="">Tax Description</label>
+                                    <label for="">Product Description</label>
                                     <textarea name="meta_description" rows="3" class="form-control"></textarea>
-                                </div>.
+                                </div>
+                                <div class="col-md-2  mb-2">
+                                    <label for="">Selling Price</label>
+                                    <input type="text" class="form-control" name="taxname" required>
+                                    <div class="alert alert-danger" style="display:none"></div>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">Offer Price</label>
+                                    <input type="text" class="form-control" name="taxvalue">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">HSN Code</label>
+                                    <input type="text" class="form-control" name="taxpercentage">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">Batch Number</label>
+                                    <input type="text" class="form-control" name="taxpercentage">
+                                </div>
+
                                 <div class="col-md-4 mb-2">
                                     <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+                                    <label for="status" class="checkboxLabel">Featured&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
                                 </div>
 
                                 <div class="col-md-12 ">
