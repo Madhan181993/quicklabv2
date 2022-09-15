@@ -36,6 +36,9 @@
   color: red !important;;
 }
 /* Category Feature */
+.table-category{
+  width: 80% !important;;
+}
 .category-head{
   width:30%;
 
@@ -47,11 +50,9 @@
 }
 
 .child-category{
-  margin-left:30px;
-  padding-left: 30px;
-  border:1px solid black;
+  padding-left: 70px!important;
+  color:red;
 }
-
 
 /* End Category Feature */
 

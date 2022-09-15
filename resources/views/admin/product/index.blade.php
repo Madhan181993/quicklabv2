@@ -25,6 +25,7 @@
                     <th>Selling Price</th>
                     <th>Offer Price</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -75,33 +76,44 @@
                         <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-                            <div class="col-md-6  mb-2">
+                            <div class="col-md-3  mb-2">
                                     <label for="">SKU</label>
                                     <input type="text" class="form-control" name="taxcode" required>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <div class="col-md-6  mb-2">
-                                    <label for="">Selling Price</label>
-                                    <input type="text" class="form-control" name="taxname" required>
-                                    <div class="alert alert-danger" style="display:none"></div>
-                                </div>
                                 <div class="col-md-6 mb-2">
-                                    <label for="">Offer Price</label>
-                                    <input type="text" class="form-control" name="taxvalue">
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="">HSN Code</label>
+                                    <label for="">Product Name</label>
                                     <input type="text" class="form-control" name="taxpercentage">
                                 </div>
-
-
 
                                 <div class="col-md-12 mb-2">
                                     <label for="">Product Description</label>
                                     <textarea name="meta_description" rows="3" class="form-control"></textarea>
-                                </div>.
+                                </div>
+                                <div class="col-md-2  mb-2">
+                                    <label for="">Selling Price</label>
+                                    <input type="text" class="form-control" name="taxname" required>
+                                    <div class="alert alert-danger" style="display:none"></div>
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">Offer Price</label>
+                                    <input type="text" class="form-control" name="taxvalue">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">HSN Code</label>
+                                    <input type="text" class="form-control" name="taxpercentage">
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <label for="">Batch Number</label>
+                                    <input type="text" class="form-control" name="taxpercentage">
+                                </div>
+
                                 <div class="col-md-4 mb-2">
                                     <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
+                                </div>
+
+                                <div class="col-md-4 mb-2">
+                                    <label for="status" class="checkboxLabel">Featured&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
                                 </div>
 
                                 <div class="col-md-12 ">

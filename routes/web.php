@@ -33,11 +33,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //test start
 
-Route::get('categories', function() {
-    return view ('admin.category.index', [
-        'categories' => Category::tree(),
-    ]);
-})->name('index');
+// Route::get('categories', function() {
+//     return view ('admin.category.index', [
+//         'categories' => Category::tree(),
+//     ]);
+// })->name('index');
 
 
 //test end
@@ -50,9 +50,9 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
     // Route::get('categories', [CategoryController::class,'index']);
 
 
-    // Route::get('categories', [CategoryController::class,'index']);
-    Route::get('add-category','Admin\CategoryController@add');
-    Route::POST('insert-category','Admin\CategoryController@insert');
+    Route::get('categories', [CategoryController::class,'index']);
+    Route::get('add-category',[CategoryController::class,'add']);
+    Route::POST('insert-category',[CategoryController::class,'insert']);
     Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
     Route::put('update-category', [CategoryController::class, 'update']);
 

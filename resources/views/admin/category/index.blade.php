@@ -9,6 +9,7 @@
     label {
         font-size: 14px;
         font-weight: 500;
+        display:flex;
     }
 
     input[type="text"],
@@ -17,25 +18,50 @@
         height: 30px;
     }
 </style>
-<div class="row">
-    <div class="category-head flex-container">
-        @foreach($categories as $category)
 
-        <div class="parent-category flex-child">{{ $category->categoriesname }}</div>
-        <div class="">{{ $category->categoriesdescription }}</div>
-        <div class="">{{ $category->status }}</div>
+<h4>Category Page</h4>
+<div class="card">
+    <div class="card-body">
+        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Category</a>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Parent</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($category as $item)
+                <tr>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>
+                        @if($item->category_id)
+                        {{ $item->parent->name }}
+                        @else
+                        No Parent
+                        @endif
+                    </td>
+                    <td>{{  ($item->status == 1  ? "Active" : "Inactive" ) }}</td>
 
-        @foreach($category->children as $child)
-
-        <div class="child-category">{{ $child->categoriesname }}</div>
-
-        @endforeach
-
-        @endforeach
+                    <td>
+                        <button href="#" value="{{ $item->id }}" class="editbtn"><i class="far fa-edit"></i></button>
+                        <button href="#" data-toggle="tooltip" title="Delete" class="deletebtn"><i class="far fa-trash-alt"></i></button>
+                        <!-- <button data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button> -->
+                        <a href=""></a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
     </div>
-
 </div>
+
+
 
 
 
@@ -48,7 +74,7 @@
 
 <!-- Modal for Add Category -->
 <div class="modal fade" id="AddCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-l">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add category</h5>
@@ -61,22 +87,28 @@
                     <div class="card-body">
                         <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-6  mb-2">
+                            <!-- <div class="row"> -->
+                                <div class="col-md-10  mb-2">
                                     <label for="">Category Name</label>
                                     <input type="text" class="form-control" name="name" required>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="">Category Code</label>
-                                    <input type="text" class="form-control" name="slug">
+                                <div class="col-md-10 mb-2">
+                                    <label for="parentcategory">Parent Category</label>
+                                    <select name="category_id" width="150px;"id="">
+                                        
+                                        <option value="">No Parent Category</option>
+                                        @foreach($parent as $parentid)
+                                            <option value="{{ $parentid->id }}">{{ $parentid->name }}</option>
+                                        @endforeach
+                                    </select>
+
+
                                 </div>
-                                <div class="col-md-12 mb-2">
-                                    <label for="">Category Description</label>
-                                    <textarea name="meta_description" rows="3" class="form-control"></textarea>
-                                </div>
+
                                 <div class="col-md-4 mb-2">
-                                    <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
+                                    <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;
+                                        <input type="checkbox" class="form-control" name="status" checked></label>
                                 </div>
                                 <div class="col-md-12 ">
 

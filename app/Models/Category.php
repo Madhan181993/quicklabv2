@@ -10,31 +10,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    public static function tree()
-    {
-        $allCategories = DB::table('categories')->get();
-
-        $rootCategories = $allCategories->where('categoriesparentid', '=', '0');
-
-        foreach ($rootCategories as $rootCategory) {
-            $rootCategory->children = $allCategories->where('categoriesparentid', $rootCategory->id);
-        }
-        return $rootCategories;
-
-        // dd($rootCategories);
-    }
-
     protected $table = 'categories';
 
     protected $fillable = [
+        'category_id',
         'name',
-        'slug',
-        'description',
-        'status',
-        'popular',
-        'image',
-        'meta_title',
-        'meta_description',
-        'meta_keywords',
+        'status'
     ];
+
+    public function parent(){
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }

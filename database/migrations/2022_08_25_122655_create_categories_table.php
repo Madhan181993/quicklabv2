@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoriesTable extends Migration
 {
@@ -14,17 +15,14 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->id();
+
+            $table->bigIncrements('id');
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->foreign('category_id')->references('id')->on('categoriew')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
-            $table->string('slug');
-            $table->longText('description');
-            $table->tinyInteger('status')->default('0');
-            $table->tinyInteger('popular')->default('0');
-            $table->string('image');
-            $table->string('meta_title');
-            $table->string('meta_description');
-            $table->string('meta_keywords');
-            $table->timestamps();
+            $table->enum('status', ['1', '0'])->default('1');
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
         });
     }
 
