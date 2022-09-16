@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
 
 
-        $parent = Category::whereNull('category_id')->get();
+        $parent = Category::where('category_id', '=', NULL)->get();
         $category = Category::all();
 
         return view('admin.category.index')

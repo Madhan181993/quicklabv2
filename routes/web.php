@@ -74,6 +74,10 @@ Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
     // Product Management Routes
     Route::get('products', [ProductController::class,'index'])->name('products');
+    Route::get('add-product',[ProductController::class,'addProduct'])->name('add-product');
+    Route::POST('insert-product',[ProductController::class,'insert'])->name('insert-product');
+    Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('edit-product');
+    Route::Post('update-product',[ProductController::class,'update'])->name('update-product');
 
     // Admin Profile Routes
     Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
