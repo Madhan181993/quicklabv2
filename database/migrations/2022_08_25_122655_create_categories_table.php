@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
 
             $table->bigIncrements('id');
             $table->bigInteger('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categoriew')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('category_id')->references('id')->on('categoriew')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->enum('status', ['1', '0'])->default('1');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

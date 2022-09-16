@@ -63,17 +63,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
         Route::put('update-category', [CategoryController::class, 'update']);
 
-
-        Route::get('categories', 'Admin\CategoryController@index');
-
-        Route::get('add-category','Admin\CategoryController@add');
-
-        Route::POST('insert-category','Admin\CategoryController@insert');
-
-        Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
-
-        Route::put('update-category', [CategoryController::class, 'update']);
-
         Route::get('company-settings', 'Admin\CompanyController@index')->name('company-settings');
         Route::post('edit-company', 'Admin\CompanyController@editCompany')->name('edit-company');
         Route::put('update-company', 'Admin\CompanyController@updateCompany')->name('update-company');
@@ -95,6 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         // Admin Profile Routes
         Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
+    });
 });
 
 
