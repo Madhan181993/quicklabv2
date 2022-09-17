@@ -80,13 +80,13 @@
                         </a>
                     </div> -->
 
-                    <a href="{{ url('products') }}" class="bg-dark list-group-item list-group-item-action ">
+                    <a href="{{ url('admin/products') }}" class="bg-dark list-group-item list-group-item-action ">
                         <div class="d-flex w-100 justify-content-start align-items-center  ">
                             <span class="fa fa-shopping-basket fa-fw mr-3"></span>
                             <span class="menu-collapsed">Products</span>
                         </div>
                     </a>
-                    <a href="{{ url('categories') }}" class="bg-dark list-group-item list-group-item-action">
+                    <a href="{{ url('admin/categories') }}" class="bg-dark list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-object-group fa-fw mr-3"></span>
                             <span class="menu-collapsed">Categories</span>
@@ -100,7 +100,7 @@
                         </div>
                     </a>
 
-                    <a href="{{ url('settings') }}" class="bg-dark list-group-item list-group-item-action">
+                    <a href="{{ url('admin/settings') }}" class="bg-dark list-group-item list-group-item-action">
                         <div class="d-flex w-100 justify-content-start align-items-center">
                             <span class="fa fa-cog fa-fw mr-3"></span>
                             <span class="menu-collapsed">Settings</span>

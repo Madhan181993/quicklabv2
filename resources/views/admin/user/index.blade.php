@@ -164,15 +164,10 @@
                                     <input type="text" class="form-control" name="userpincode">
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <div class="col-md-6  mb-2">
-                                    <label for="">User Role</label>
-                                    <!-- 1:Admin, 2:Partner, 3:Customer -->
-                                    <select name="userrole" id="userrole">
-                                        <option value="">Please select role</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Partner</option>
-                                    </select>
-                                    <div class="alert alert-danger" style="display:none"></div>
+                                <div class="col-md-3 mb-2">
+                                    <label class="">User Role&nbsp;&nbsp;</label>
+                                        <label for="admin_role" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role"></label>
+                                        <label for="partner_role" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role"></label>
                                 </div>
                                 <div class="col-md-12 ">
                                     <button type="submit" class="btn btn-primary popup-btn">Submit</button>
@@ -292,18 +287,11 @@
                                     <input type="text" class="form-control" name="userpincode" id="userpincode" required>
                                     <div class="alert alert-danger" style="display:none"></div>
                                 </div>
-                                <!-- <div class="col-md-6  mb-2">
-                                    <label for="">User Role</label>
-                                    <!-- <div id="userrole_append"> -->
-                                <!-- <select name="userrole" id="userrole">
-                                        <option value="0">Please select role</option>
-                                        <option value="1">Admin</option>
-                                        <option value="2">Customer</option>
-                                        <option value="3">Partner</option>  
-                                    </select> 
-                                        
-                                    </div> -->
-                                <!-- <div class="alert alert-danger" style="display:none"></div> -->
+                                <div class="col-md-3 mb-2">
+                                    <label class="">User Role&nbsp;&nbsp;</label>
+                                    <label for="admin_role" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role"></label>
+                                    <label for="partner_role" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role"></label>
+                                </div>
                             </div>
                             <div class="col-md-3  mb-2">
                                 <label for="userstatus" class="checkboxLabel">User Status&nbsp;&nbsp;<input type="checkbox" class="form-control" name="userstatus" id="userstatus"></label>
@@ -342,9 +330,6 @@
                     "user_id": id
                 },
                 success: function(response) {
-
-
-
 
                 }
             });
@@ -395,15 +380,11 @@
                     // element.value = response.user.userrole;
 
 
-
-
-                    // if (response.user.userrole == '2'){
-                    //     var html = '<select name="userrole" id="userrole"><option value="">Please select your role</option><option value="2" selected="selected">Customer</option><option value="3">Partner</option></select>';
-                    // }else if(response.user.userrole == '3'){
-                    //     var html = '<select name="userrole" id="userrole"><option value="">Please select your role</option><option value="2" >Customer</option><option value="3" selected="selected">Partner</option></select>';
-                    // }
-
-                    // $('#userrole_append').html(html);
+                    if (response.user.userrole == '1'){
+                        $("#admin_role").attr('checked', true);
+                    }else if(response.user.userrole == '2'){
+                        $("#partner_role").attr('checked', true);
+                    }
 
                     // Setting the Checkboxes
                     if (response.user.userstatus == 1) {
