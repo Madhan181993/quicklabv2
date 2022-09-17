@@ -82,11 +82,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         // Product Management Routes
         Route::get('products', [ProductController::class,'index'])->name('products');
 
-<<<<<<< HEAD
+
         // Admin Profile Routes
         Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
     });
-=======
+
 
 Route::middleware(['auth', 'IsAdmin'])->group(function () {
 
