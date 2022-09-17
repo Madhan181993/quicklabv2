@@ -82,9 +82,51 @@ Route::prefix('admin')->name('admin.')->group(function(){
         // Product Management Routes
         Route::get('products', [ProductController::class,'index'])->name('products');
 
+
         // Admin Profile Routes
         Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
     });
+
+
+Route::middleware(['auth', 'IsAdmin'])->group(function () {
+
+    Route::get('/dashboard', 'Admin\FrontendController@index');
+
+    // Route::get('categories', [CategoryController::class,'index']);
+
+
+    Route::get('categories', [CategoryController::class,'index']);
+    Route::get('add-category',[CategoryController::class,'add']);
+    Route::POST('insert-category',[CategoryController::class,'insert']);
+    Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
+    Route::put('update-category', [CategoryController::class, 'update']);
+
+    Route::get('company-settings', 'Admin\CompanyController@index')->name('company-settings');
+    Route::post('edit-company', 'Admin\CompanyController@editCompany')->name('edit-company');
+    Route::put('update-company', 'Admin\CompanyController@updateCompany')->name('update-company');
+
+    Route::get('users', 'Admin\UserController@index')->name('users');
+    Route::post('add-user', 'Admin\UserController@addUser')->name('add-user');
+    Route::post('edit-user', 'Admin\UserController@editUser')->name('edit-user');
+    Route::put('update-user', 'Admin\UserController@updateUser')->name('update-user');
+    Route::put('delete-user', 'Admin\UserController@deleteUser')->name('delete-user');
+
+    Route::get('settings',[SettingsController::class,'index'])->name('settings');
+
+
+    Route::get('tax', [TaxController::class,'index']);
+    Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
+
+    // Product Management Routes
+    Route::get('products', [ProductController::class,'index'])->name('products');
+    Route::get('add-product',[ProductController::class,'addProduct'])->name('add-product');
+    Route::POST('insert-product',[ProductController::class,'insert'])->name('insert-product');
+    Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('edit-product');
+    Route::Post('update-product',[ProductController::class,'update'])->name('update-product');
+
+    // Admin Profile Routes
+    Route::get('profile', [AdminProfileController::class,'index'])->name('profile');
+>>>>>>> sam_dev_product
 });
 
 

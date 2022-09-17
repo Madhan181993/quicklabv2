@@ -25,7 +25,8 @@ class CreateProductsTable extends Migration
             $table->decimal('sale_price_USD')->nullable();
             $table->unsignedBigInteger('QL_points')->nullable();
             $table->string('SKU');
-            $table->tinyInteger('stock_status');
+            $table->enum('stock_status',['In Stock', 'Out of Stock'])->default('In Stock');
+            $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(1);
             $table->string('image')->nullable();
             $table->text('images')->nullable();
@@ -35,7 +36,6 @@ class CreateProductsTable extends Migration
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      *
