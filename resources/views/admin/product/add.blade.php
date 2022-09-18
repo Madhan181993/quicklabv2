@@ -106,13 +106,26 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="" class="form-label">Product Image</label>
-                <input type="file" class="form-control input-file" name="image" id="image">
+                <input type="file" class="form-control input-file" name="image" id="image" onchange="loadFile(event)">
             </div>
+            <div id="productImage" style="display:none;"><img id="output" width="100px" height="100px" /></div>
         </div>
         <div class="d-flex justify-content-center">
+            <a href="{{route('admin.products')}}" class="btn btn-success text-white btn-outline-success form-control w-25 m-3">Cancel</a>
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-25 m-3" id="">Add Product</button>
         </div>
     </form>
 </div>
+
+@endsection
+
+@section('scripts')
+<script>
+    var loadFile = function(event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        $("#productImage").show();
+    };
+</script>
 
 @endsection

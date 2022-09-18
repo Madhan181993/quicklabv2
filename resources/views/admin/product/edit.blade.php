@@ -112,6 +112,7 @@
             <div><img src="{{asset('assets/images/products')}}/{{$product->image}}" width="100px" height="100px"></div>
         </div>
         <div class="d-flex justify-content-center">
+            <a href="{{route('admin.products')}}" class="btn btn-success text-white btn-outline-success form-control w-25 m-3">Cancel</a>
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-25 m-3" id="">Submit</button>
         </div>
     </form>
