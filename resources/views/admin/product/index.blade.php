@@ -25,11 +25,8 @@
                             </div>
                             <div class="col-md-6">
                             
-<<<<<<< Updated upstream
                                 <a href="{{ Route('admin.add-product') }}" class="btn btn-primary button1">Add Product</a>
-=======
-                                <a href="{{ url('admin/add-product') }}" class="btn btn-primary button1">Add Product</a>
->>>>>>> Stashed changes
+
                             </div>
                         </div>
                     </div>
