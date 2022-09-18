@@ -22,7 +22,7 @@
 <h4>Add Products</h4>
 <div class="container w-75  border mt-5 ">
 
-    <form class="form-horizontal" enctype="multipart/form-data" action="{{ Route('insert-product') }}" method="POST">
+    <form class="form-horizontal" enctype="multipart/form-data" action="{{ Route('admin.insert-product') }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-3 mb-3">

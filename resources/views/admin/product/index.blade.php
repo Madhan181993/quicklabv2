@@ -12,6 +12,9 @@
         }
     </style>
     <div class="container" style="padding:30px 0;">
+        @if (session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -22,7 +25,7 @@
                             </div>
                             <div class="col-md-6">
                             
-                                <a href="{{ Route('add-product') }}" class="btn btn-primary button1">Add Product</a>
+                                <a href="{{ Route('admin.add-product') }}" class="btn btn-primary button1">Add Product</a>
                             </div>
                         </div>
                     </div>
@@ -57,8 +60,8 @@
                                         <td>{{$product->category->name}}</td>
                                         <td>{{$product->created_at}}</td>
                                         <td>
-                                            <a href="{{ Route('edit-product', $product->id ) }}" class="editbtn"><i class="far fa-edit text-dark"></i></i></a>
-                                            <a href="#" onclick="confirm('Are you sure, you want to delete this product?') || event.stopImmediatePropagation()" style="margin-left:10px;" wire:click.prevent="deleteProduct({{$product->id}})"><i class="far fa-trash-alt"></i></i></a>
+                                            <a href="{{ Route('admin.edit-product', $product->id ) }}" class="editbtn"><i class="far fa-edit text-dark"></i></i></a>
+                                            <a href="{{ Route('admin.delete-product', $product->id ) }}" onclick="confirm('Are you sure, you want to delete this product?') || event.stopImmediatePropagation()" style="margin-left:10px;"><i class="far fa-trash-alt"></i></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -72,4 +75,12 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+    <script>
+        setTimeout(function() {
+            $('.alert-success').hide();
+        }, 2000); // <-- time in milliseconds
+    </script>
 @endsection

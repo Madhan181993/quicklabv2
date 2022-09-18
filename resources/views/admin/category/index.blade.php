@@ -22,7 +22,7 @@
 <h4>Category Page</h4>
 <div class="card">
     <div class="card-body">
-        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Category</a>
+        <a href="{{ url('admin/add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Category</a>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -85,7 +85,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('admin/insert-category') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!-- <div class="row"> -->
                                 <div class="col-md-10  mb-2">

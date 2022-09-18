@@ -71,7 +71,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('add-user', 'Admin\UserController@addUser')->name('add-user');
         Route::post('edit-user', 'Admin\UserController@editUser')->name('edit-user');
         Route::put('update-user', 'Admin\UserController@updateUser')->name('update-user');
-        Route::put('delete-user', 'Admin\UserController@deleteUser')->name('delete-user');
+        Route::post('delete-user', 'Admin\UserController@deleteUser')->name('delete-user');
 
         Route::get('settings',[SettingsController::class,'index'])->name('settings');
 
@@ -84,6 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::POST('insert-product',[ProductController::class,'insert'])->name('insert-product');
         Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('edit-product');
         Route::Post('update-product',[ProductController::class,'update'])->name('update-product');
+        Route::get('delete-product/{id}',[ProductController::class,'delete'])->name('delete-product');
 
 
         // Admin Profile Routes

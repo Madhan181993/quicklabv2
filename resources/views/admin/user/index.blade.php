@@ -46,7 +46,7 @@
 
                     <td>
                         <button href="#" value="{{ $user->id }}" class="editbtn"><i class="far fa-edit"></i></button>
-                        <button onclick="deleteUser()" class="deletebtn"><i class="far fa-trash-alt"></i></button>
+                        <button onclick="return deleteUser('{{ $user->id }}');" class="deletebtn"><i class="far fa-trash-alt"></i></button>
                     </td>
                 </tr>
                 @endforeach
@@ -166,8 +166,8 @@
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label class="">User Role&nbsp;&nbsp;</label>
-                                        <label for="admin_role" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role"></label>
-                                        <label for="partner_role" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role"></label>
+                                        <label for="admin_role" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role" value="1"></label>
+                                        <label for="partner_role" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role" value="2"></label>
                                 </div>
                                 <div class="col-md-12 ">
                                     <button type="submit" class="btn btn-primary popup-btn">Submit</button>
@@ -198,7 +198,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('update-user') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('admin/update-user') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="user_id" id="user_id" />
@@ -289,8 +289,8 @@
                                 </div>
                                 <div class="col-md-3 mb-2">
                                     <label class="">User Role&nbsp;&nbsp;</label>
-                                    <label for="admin_role" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role"></label>
-                                    <label for="partner_role" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role"></label>
+                                    <label for="admin_role_update" class="">Admin&nbsp;<input type="radio" class="" name="userrole" id="admin_role_update" value="1"></label>
+                                    <label for="partner_role_update" class="">Partner&nbsp;<input type="radio" class="" name="userrole" id="partner_role_update" value="2"></label>
                                 </div>
                             </div>
                             <div class="col-md-3  mb-2">
@@ -321,19 +321,7 @@
             $('.alert-success').hide();
         }, 2000); // <-- time in milliseconds
 
-        function deleteUser(id) {
-            $.ajax({
-                type: "POST",
-                url: "{{route('admin.delete-user')}}",
-                data: {
-                    "_token": "{{ csrf_token() }}",
-                    "user_id": id
-                },
-                success: function(response) {
-
-                }
-            });
-        }
+        
 
         $(document).on('click', '.editbtn', function() {
 
@@ -380,10 +368,10 @@
                     // element.value = response.user.userrole;
 
 
-                    if (response.user.userrole == '1'){
-                        $("#admin_role").attr('checked', true);
-                    }else if(response.user.userrole == '2'){
-                        $("#partner_role").attr('checked', true);
+                    if (response.user.userrole == 1){
+                        $("#admin_role_update").attr("checked",true);
+                    }else if(response.user.userrole == 2){
+                        $("#partner_role_update").attr('checked', true);
                     }
 
                     // Setting the Checkboxes
@@ -399,6 +387,21 @@
             });
         });
     });
+    function deleteUser(id) {
+        if(confirm('Are you sure want to delete user?')){
+            $.ajax({
+                type: "POST",
+                url: "{{route('admin.delete-user')}}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "user_id": id
+                },
+                success: function(response) {
+
+                }
+            });
+        }
+    }
 </script>
 
 @endsection

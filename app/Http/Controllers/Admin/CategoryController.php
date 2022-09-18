@@ -14,14 +14,8 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
-
-
-
-
     public function index()
     {
-
-
         $parent = Category::where('category_id', '=', NULL)->get();
         $category = Category::all();
 

@@ -150,7 +150,7 @@ class UserController extends Controller
     public function deleteUser(Request $request){
         $userId = $request->input('user_id');
         $user = User::find($userId);
-        $user->deleted_status = 'Yes';
+        $user->deleted_status = 1;
         $user->update();
 
         return redirect()->back()->with('status','User Deleted Successfully');

@@ -33,6 +33,7 @@ class CreateProductsTable extends Migration
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->ondelete('cascade');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('deleted_status')->default(0);
             $table->timestamps();
         });
     }

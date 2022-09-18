@@ -22,8 +22,9 @@
 <h4>Edit and Update Products</h4>
 <div class="container w-75  border mt-5 ">
 
-    <form class="form-horizontal" enctype="multipart/form-data" action="{{ Route('update-product') }}" method="POST">
+    <form class="form-horizontal" enctype="multipart/form-data" action="{{ Route('admin.update-product') }}" method="POST">
         @csrf
+        <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
         <div class="row">
             <div class="col-md-3 mb-3">
                 <label for="UrunID" class="form-label">SKU</label>
@@ -75,15 +76,15 @@
             <div class="col-md-4 mb-3">
                 <label class="form-label" for="">Stock</label>
                 <select name="stock_status" id="stock_status" class="ms-1 d-block w-100" required>
-                    <option>In Stock</option>
-                    <option>Out of Stock</option>
+                    <option value="In Stock" @if($product->stock_status == "In Stock") selected="selected" @endif>In Stock</option>
+                    <option value="Out of Stock" @if($product->stock_status == "Out of Stock") selected="selected" @endif>Out of Stock</option>
                 </select>
             </div>
             <div class="col-md-4 mb-3">
                 <label class="form-label" for="">Featured</label>
                 <select name="featured" id="featured" class="ms-1 d-block w-100" required>
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
+                    <option value="0" @if($product->featured == 0) selected="selected" @endif>No</option>
+                    <option value="1" @if($product->featured == 1) selected="selected" @endif>Yes</option>
                 </select>
             </div>
         </div>
@@ -108,6 +109,7 @@
                 <label for="" class="form-label">Product Image</label>
                 <input type="file" class="form-control input-file" name="image" id="image">
             </div>
+            <div><img src="{{asset('assets/images/products')}}/{{$product->image}}" width="100px" height="100px"></div>
         </div>
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn btn-success text-white btn-outline-success form-control w-25 m-3" id="">Submit</button>
