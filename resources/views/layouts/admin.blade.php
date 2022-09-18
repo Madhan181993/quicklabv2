@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Quicklab') }}</title>
 
     <!-- CSS Links -->
     <link rel="stylesheet" href="{{ asset('admin/css/admin-custom.css') }}">
@@ -54,6 +54,10 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Footer start  -->
+    @include('layouts.inc.adminfooter')
+    <!-- Footer End  -->
 
     @yield('scripts')
 </body>

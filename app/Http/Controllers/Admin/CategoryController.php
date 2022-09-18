@@ -45,7 +45,7 @@ class CategoryController extends Controller
         ]);
 
 
-        // return redirect('/dashboard')->with('status', 'Category Added Successfully');
+        return redirect('/admin/categories')->with('status', 'Category Added Successfully');
     }
 
     public function edit($id)

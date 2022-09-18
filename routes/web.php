@@ -60,7 +60,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('categories', [CategoryController::class,'index']);
         Route::get('add-category',[CategoryController::class,'add']);
         Route::POST('insert-category',[CategoryController::class,'insert']);
-        Route::get('edit-category/{id}', [CategoryController::class, 'edit']);
+        // Route::get('edit-category/{id}', [CategoryController::class, 'edit-category']);
+        // Route::get('edit-category', 'Admin\CategoryController@editCategory', 'edit-category');
+        Route::post('edit-category', 'Admin\CategoryController@edit', 'edit-category');
         Route::put('update-category', [CategoryController::class, 'update']);
 
         Route::get('company-settings', 'Admin\CompanyController@index')->name('company-settings');
@@ -75,12 +77,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('settings',[SettingsController::class,'index'])->name('settings');
 
-        Route::get('tax', [TaxController::class,'index']);
+        Route::get('tax', [TaxController::class,'index'])->name('tax');
         Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
         
         // Product Management Routes
         Route::get('products', [ProductController::class,'index'])->name('products');
         Route::get('add-product',[ProductController::class,'addProduct'])->name('add-product');
+        // Route::get('add-product','Admin\ProductController@addProduct')->name('add-product');
         Route::POST('insert-product',[ProductController::class,'insert'])->name('insert-product');
         Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('edit-product');
         Route::Post('update-product',[ProductController::class,'update'])->name('update-product');
