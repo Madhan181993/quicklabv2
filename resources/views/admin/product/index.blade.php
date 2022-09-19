@@ -26,6 +26,7 @@
                             <div class="col-md-6">
                             
                                 <a href="{{ Route('admin.add-product') }}" class="btn btn-primary button1">Add Product</a>
+
                             </div>
                         </div>
                     </div>

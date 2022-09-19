@@ -26,7 +26,7 @@
 /* Settings Feature */
 
 .table-Settings{
-  width: 70% !important;
+  width: 60% !important;
   margin-left:auto;
   margin-right: auto;
   margin-top:30px;
@@ -34,6 +34,16 @@
 
 .table-settings #slno {
   color: red !important;;
+}
+
+#ToBeApplied td {
+  padding:23px;
+  font-weight:bold;
+  width:30px;
+}
+
+.table-settings .valCol{
+  width: 10px !important;
 }
 /* Category Feature */
 .table-category{

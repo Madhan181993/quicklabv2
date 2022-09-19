@@ -13,12 +13,12 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'category_id',
+        'parent_id',
         'name',
         'status'
     ];
 
     public function parent(){
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class, 'parent_id');
     }
 }

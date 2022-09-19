@@ -321,12 +321,10 @@
             $('.alert-success').hide();
         }, 2000); // <-- time in milliseconds
 
-        
-
         $(document).on('click', '.editbtn', function() {
 
             var user_id = $(this).val();
-            // alert(category_id);
+            // alert(user_id);
 
             $('#EditUserModal').modal('show');
 

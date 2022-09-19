@@ -1,0 +1,66 @@
+@extends('layouts.admin')
+
+@section('content')
+
+<style>
+table.settings {
+  border: 1px solid #C4C4C5;
+  /* text-align: center; */
+  justify-content:center;
+  margin:auto;
+}
+table.settings td, table.settings th {
+  border: 1px solid #AAAAAA;
+}
+table.settings thead {
+  background: #DDDDDD;
+}
+table.settings thead th {
+  font-weight: normal;
+}
+#slno{
+    width:20px;
+    text-align: center;
+}
+
+</style>
+
+<h4>Settings Management</h4>
+<form id="" action="{{ Route('admin.settings-update') }}" Method="post">
+    @csrf
+<table class="table table-hover table-Settings">
+
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Feature</th>
+            <th>Value</th>
+            <th>Unit</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+
+    @foreach($settings as $setting)
+<tr>
+    <td>{{ $setting->id }}</td>
+    <td>{{ $setting->feature }}</td>
+    <td><input type="text" name="ID{{ $setting->id }}" id="ID{{ $setting->id }}" value="{{ $setting->value }}">
+        </td>
+    <td>{{ $setting->unit }}</td>
+</tr>
+    @endforeach
+       
+    <tr><td colspan="4" style="background-color:#fff!important;padding-top:30px!important;">
+    <!-- <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr> -->
+    <!-- <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr> -->
+    <a href="{{ Route('admin.settings') }}" class="btn btn-primary button1"> Back</a></td></tr>
+    </tbody>
+    </tbody>
+</table>
+</form>
+        
+
+@endsection

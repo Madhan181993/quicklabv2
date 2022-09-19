@@ -63,7 +63,7 @@ html,
     }
 
 
-
+/* 
     .navbar-toggler {
         border: none;
     }
@@ -75,8 +75,11 @@ html,
 
     .navbar-textt:hover {
         text-decoration: none;
-    }
-
+    } */
+.navbar-nav .nav-link{
+    color:black;
+    font-weight: 600;
+}
     .margin {
         margin: auto;
         align-items: center;

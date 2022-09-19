@@ -15,7 +15,7 @@
                    <span style="color:white!important;">Logged in as : </span> {{ auth()->user()->userfirstname.' '.auth()->user()->userlastname }}
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link nav-color" href="{{ url('admin/dashboard') }}">Home </a>
+                    <a class="nav-link nav-color" href="{{ url('/home') }}">Home </a>
                 </li>
                <li class="nav-item">
                      <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown"> -->
