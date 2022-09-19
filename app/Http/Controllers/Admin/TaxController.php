@@ -11,25 +11,20 @@ class TaxController extends Controller
 {
     public function index()
     {
-        $tax = Tax::all();
-
-        return view('admin.tax.index', compact('tax'));
+        $taxes = Tax::all();
+        return view('admin.tax.index', compact('taxes'));
     }
 
-public function insert(Request $request)
-{
-// return "Insert Tax page";
-    // dd($request);
-          //  Validate fields
-          $this->validate($request, [
+    public function insert(Request $request)
+    {
+        $this->validate($request, [
             'taxcode' => 'required',
             'taxname' => 'required'
         ]);
 
-if($request->taxstatus == true)
-{
-$taxstatus = 1;
-}
+        if ($request->taxstatus == true) {
+            $taxstatus = 1;
+        }
         $data = array(
             'taxcode' =>  $request->taxcode,
             'taxname' => $request->taxname,
@@ -41,22 +36,43 @@ $taxstatus = 1;
         );
         $create = Tax::create($data);
         return redirect()->route('admin.tax');
-
-
-        // return redirect('/admin/tax');
-
-}
-
-
+    }
 
 
     public function edit($id)
     {
         $tax = Tax::find($id);
-        // return view('admin.category.edit', compact('category'));
-        return response()->json([
-            'status' => 200,
-            'category' => $tax,
-        ]);
+
+        // dd($tax);
+        if ($tax) {
+            return response()->json([
+                'status' => '200',
+                'tax' => $tax,
+            ]);
+        } else {
+            return response()->json([
+                'status' => '404',
+            ]);
+        }
+    }
+
+    public function update(Request $request)
+    {
+
+
+        // $taxId = $request->input('id');
+        $taxId = $request->editTaxId;
+        $TaxModel = Tax::find($taxId);
+
+        $TaxModel->taxcode = $request->edittaxcode;
+        $TaxModel->taxname = $request->edittaxname;
+        $TaxModel->taxvalue = $request->edittaxvalue;
+        $TaxModel->taxpercentage = $request->edittaxpercentage;
+        $TaxModel->taxdescription = $request->edittaxdescription;
+        $TaxModel->taxstatus = $request->edittaxstatus;
+
+        $TaxModel->update();
+
+        return redirect('admin/tax')->with('status', 'Product Updated Successfully');
     }
 }
