@@ -21,7 +21,7 @@ class ProductController extends Controller
     public function addProduct(Request $request)
     {
         //TODO : Check whether Top level categories should be filtered.
-        $categories = Category::where('category_id', '=', NULL)->get();
+        $categories = Category::where('parent_id', '=', NULL)->get();
 
         return view('admin.product.add', ['categories' => $categories]);
     }
