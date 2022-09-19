@@ -26,13 +26,14 @@ table.settings thead th {
 </style>
 
 <h4>Settings Management</h4>
+<form id="formSettingsUpdate" action="{{ Route('admin.settings-update') }}" Method="post">
+    @csrf
 <table class="table table-hover table-Settings">
 
 
     <thead>
-        <tr><th colspan="4" style="background-color:#fff!important;"><a href="{{ Route('admin.editsettings') }}" class="btn btn-primary button1"> Edit Settings</a></th></tr>
         <tr>
-            <th id="slno">#</th>
+            <th>#</th>
             <th>Feature</th>
             <th>Value</th>
             <th>Unit</th>
@@ -46,14 +47,17 @@ table.settings thead th {
 <tr>
     <td>{{ $setting->id }}</td>
     <td>{{ $setting->feature }}</td>
-    <td>{{ $setting->value }}</td>
+    <td><input type="text" name="ID{{ $setting->id }}" id="ID{{ $setting->id }}" value="{{ $setting->value }}">
+        </td>
     <td>{{ $setting->unit }}</td>
 </tr>
     @endforeach
        
-
+    <tr><td colspan="4" style="background-color:#fff!important;padding-top:30px!important;">
+    <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr>
     </tbody>
 </table>
-
+</form>
+        
 
 @endsection

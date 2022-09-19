@@ -4,7 +4,7 @@
 
 <!-- TODO : Show Parent Field and fetch based on Parent Id from Category Table -->
 <!-- TODO : Categories Add, Edit Functionality to be completed. -->
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
     label {
         font-size: 14px;
@@ -45,10 +45,10 @@
                         No Parent
                         @endif
                     </td>
-                    <td>{{ ($item->status == 1  ? "Active" : "Inactive" ) }}</td>
+                    <td>{{ ($item->categorystatus == 1  ? "Active" : "Inactive" ) }}</td>
 
                     <td>
-                        <button href="#" value="{{ $item->id }}" class="editbtn"><i class="far fa-edit"></i></button>
+                        <button href="" value="{{ $item->id }}" class="editbtn"><i class="far fa-edit"></i></button>
                         <button href="#" data-toggle="tooltip" title="Delete" class="deletebtn"><i class="far fa-trash-alt"></i></button>
                         <!-- <button data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button> -->
                         <a href=""></a>
@@ -62,15 +62,6 @@
 </div>
 
 
-
-
-
-
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddCategoryModal">
-    Launch demo modal
-</button> -->
 
 <!-- Modal for Add Category -->
 <div class="modal fade" id="AddCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -95,23 +86,19 @@
                             </div>
                             <div class="col-md-10 mb-2">
                                 <label for="parentcategory">Parent Category</label>
-                                <select name="category_id" width="150px;" id="">
+                                <select name="category_id" width="150px;">
 
                                     <option value="">No Parent Category</option>
                                     @foreach($parent as $parentid)
                                     <option value="{{ $parentid->id }}">{{ $parentid->name }}</option>
                                     @endforeach
                                 </select>
-
-
                             </div>
-
                             <div class="col-md-4 mb-2">
                                 <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;
-                                    <input type="checkbox" class="form-control" name="status" checked></label>
+                                    <input type="checkbox" class="form-control" name="categorystatus" checked></label>
                             </div>
                             <div class="col-md-12 ">
-
                                 <button type="submit" class="btn btn-primary popup-btn">Submit</button>
                                 <button class="btn btn-secondary popup-btn" data-dismiss="modal">Close</button>
                             </div>
@@ -132,47 +119,50 @@
 
 <!-- Start Modal for Edit Category -->
 
-<div class="modal fade" id="EditCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCategoryrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
+                <div id="success_message"></div>
                 <h5 class="modal-title" id="exampleModalLabel">Edit category</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+
+                <ul id="updateform_errlist"></ul>
+
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('admin/insert-category') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form id="editFormId" enctype="multipart/form-data">
+                            <input type="text" id="editCategoryId">
+                            <div id="message_area"></div>
                             <!-- <div class="row"> -->
                             <div class="col-md-10  mb-2">
                                 <label for="">Category Name</label>
-                                <input type="text" class="form-control" name="name" required>
+                                <input type="text" class="form-control" name="name" id="name" required>
                                 <div class="alert alert-danger" style="display:none"></div>
                             </div>
                             <div class="col-md-10 mb-2">
-                                <label for="parentcategory">Parent Category</label>
-                                <select name="category_id" width="150px;" id="">
+                                <label for="category_id">Parent Category</label>
+                                <select name="category_id" id="category_id" width="150px;">
 
                                     <option value="">No Parent Category</option>
                                     @foreach($parent as $parentid)
                                     <option value="{{ $parentid->id }}">{{ $parentid->name }}</option>
                                     @endforeach
                                 </select>
-
-
                             </div>
 
                             <div class="col-md-4 mb-2">
                                 <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;
-                                    <input type="checkbox" class="form-control" name="status" checked></label>
+                                    <input type="checkbox" class="form-control" name="categorystatus" id="categorystatus"></label>
                             </div>
                             <div class="col-md-12 ">
 
-                                <button type="submit" class="btn btn-primary popup-btn">Submit</button>
-                                <button class="btn btn-secondary popup-btn" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary popup-btn update_category">Submit</button>
+                                <button type="button" class="btn btn-secondary popup-btn" data-dismiss="modal">Close</button>
                             </div>
                     </div>
                     </form>
@@ -195,60 +185,93 @@
 <script>
     $(document).ready(function() {
 
-                $(document).on('click', '.editbtn', function() {
 
-                            var category_id = $(this).val();
-                            // alert(category_id);
+        $(document).on('click', '.editbtn', function(e) {
+            e.preventDefault();
 
-                            $('#EditCategoryrModal').modal('show');
+            var id = $(this).val();
+            console.log('this id : ' + id);
+            $('#editCategoryrModal').modal('show');
 
-                            $.ajax({
-                                type: "POST",
-                                url: "{{ url('admin/edit-category')}}",
-                                data: {
-                                    "_token": "{{ csrf_token() }}",
-                                    "category_id": category_id
-                                },
-                                success: function(response) {
-                                    // console.log(response.user.name);
-                                    $('#name').val(response.category.name);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: "GET",
+                url: "edit-category/" + id,
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 404) {
+                        console.log('error no. 404 edit');
+
+                    } else {
+                        $('#name').val(response.category.name);
+                        //Set Checkbox status
+                        if (response.category.status == 1) {
+                            $("#categorystatus").prop("checked", true);
+                        }
+                        $("#category_id").val(response.category.id);
+
+                        //send the id
+                        $('#editCategoryId').val(response.category.id);
+
+                    }
 
 
-                                    // Setting the Checkboxes
-                                    if (response.category.status == 1) {
-                                        $('input[name=status]').attr('checked', true);
-                                    } else {
-                                        $('input[name=status]').attr('checked', false);
-                                    }
+                }
+            });
+        })
 
-                                    $("#category_id").val(user_id);
+    })
 
-                                }
+    $(document).on('click', '.update_category', function(e) {
+        e.preventDefault();
+
+        var id = $('#editCategoryId').val();
+        console.log('id : ' + id);
+        var data = {
+            // 'id' : id,
+            'name': $('#name').val(),
+            'category_id': $('#category_id').val(),
+            'categorystatus': $('#categorystatus').val(),
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type:"POST",
+            url: "update-category",
+            data: data,
+            dataType: "json",
+            success: function(response) {
+                // console.log(response);
+
+                if (response.status == 400) {
+                    console.log('error no. 400 - Update');
+
+                } else if (response.status = 404) {
+                    console.log(response);
+                    console.log('error no. 404 udpate');
+
+
+                } else {
+
+
+                    $('#editCategoryrModal').modal('hide');
+                }
+            }
+        });
 
 
 
-
-
-                                // old category edit
-                                // $(document).on('click', '.editbtn', function() {
-
-                                //     var category_id = $(this).val();
-                                //     // alert(category_id);
-
-                                //     $('#EditCategoryModal').modal('show');
-
-                                //     $.ajax({
-                                //         type: "GET",
-                                //         url: "/edit-category/" + category_id,
-                                //         success: function(response) {
-                                //             // console.log(response.category.name);
-                                //             $('#name').val(response.category.name);
-                                //             $("#category_id").val(category_id);
-
-                                //         }
-                                    });
-                                });
-                            });
+    });
 </script>
 
 

@@ -12,6 +12,7 @@
 <!-- <link rel="stylesheet" href="css/landingstyle.css"> -->
 <link href="{{ asset('frontend/css/landingstyle.css') }}" rel="stylesheet">
 
+
 <!-- Link Swiper's CSS -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" />
 
@@ -19,6 +20,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <body>
+
 
 
 

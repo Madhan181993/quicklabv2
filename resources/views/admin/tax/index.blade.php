@@ -15,7 +15,7 @@
 <div class="card">
 
     <div class="card-body">
-        <a href="{{ url('add-category') }}" class="btn btn-primary button1" data-toggle="modal" data-target="#AddCategoryModal"> Add Tax</a>
+        <a href="#" class="btn btn-primary button1" data-toggle="modal" data-target="#AddTaxModal"> Add Tax</a>
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
@@ -57,8 +57,8 @@
 </button> -->
 
 <!-- Modal -->
-<div class="modal fade" id="AddCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+<div class="modal fade" id="AddTaxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Tax</h5>
@@ -69,7 +69,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('insert-category') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('insert-tax') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                             <div class="col-md-6  mb-2">
@@ -91,19 +91,18 @@
                                     <input type="text" class="form-control" name="taxpercentage">
                                 </div>
 
-
-
                                 <div class="col-md-12 mb-2">
                                     <label for="">Tax Description</label>
-                                    <textarea name="meta_description" rows="3" class="form-control"></textarea>
+                                    <textarea name="taxdescription" rows="3" class="form-control"></textarea>
                                 </div>.
                                 <div class="col-md-4 mb-2">
-                                    <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;<input type="checkbox" class="form-control" name="status"></label>
+                                    <label for="status" class="checkboxLabel" >Status&nbsp;&nbsp;
+                                        <input type="checkbox" class="form-control" name="taxstatus"></label>
                                 </div>
 
                                 <div class="col-md-12 ">
                                     
-                                    <button type="submit" class="btn btn-primary popup-btn">Update</button>
+                                    <button type="submit" class="btn btn-primary add-btn">Add</button>
                                     <button class="btn btn-secondary popup-btn"  data-dismiss="modal">Close</button>
                                 </div>
                             </div>

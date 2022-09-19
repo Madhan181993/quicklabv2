@@ -36,15 +36,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
-    //test start
-
-    // Route::get('categories', function() {
-    //     return view ('admin.category.index', [
-    //         'categories' => Category::tree(),
-    //     ]);
-    // })->name('index');
-    
-    //test end
 
     Route::view('/login','admin.user.login')->name('login');
     Route::post('/login',[UserController::class,'login'])->name('login');
@@ -62,8 +53,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::POST('insert-category',[CategoryController::class,'insert']);
         // Route::get('edit-category/{id}', [CategoryController::class, 'edit-category']);
         // Route::get('edit-category', 'Admin\CategoryController@editCategory', 'edit-category');
-        Route::post('edit-category', 'Admin\CategoryController@edit', 'edit-category');
-        Route::put('update-category', [CategoryController::class, 'update']);
+        Route::get('edit-category/{id}', [CategoryController::class,'edit'])->name('edit-category');
+        Route::post('update-category', [CategoryController::class, 'update']);
 
         Route::get('company-settings', 'Admin\CompanyController@index')->name('company-settings');
         Route::post('edit-company', 'Admin\CompanyController@editCompany')->name('edit-company');
@@ -76,8 +67,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('delete-user', 'Admin\UserController@deleteUser')->name('delete-user');
 
         Route::get('settings',[SettingsController::class,'index'])->name('settings');
+        Route::get('edit-settings',[SettingsController::class,'edit'])->name('editsettings');
+        Route::post('settings-update',[SettingsController::class,'update'])->name('settings-update');
 
         Route::get('tax', [TaxController::class,'index'])->name('tax');
+        Route::post('/insert-tax', [TaxController::class,'insert'])->name('insert-tax');
+
         Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
         
         // Product Management Routes
