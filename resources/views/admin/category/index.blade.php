@@ -90,7 +90,7 @@ This NOT OK.
                             </div>
                             <div class="col-md-10 mb-2">
                                 <label for="parentcategory">Parent Category</label>
-                                <select name="parent_id" width="150px;">
+                                <select name="parent_id" id="parent_id" width="150px;">
 
                                     <option value="">No Parent Category</option>
                                     @foreach($parent as $parentid)
@@ -146,7 +146,7 @@ This NOT OK.
                             </div>
                             <div class="col-md-10 mb-2">
                                 <label for="category_id">Parent Category</label>
-                                <select name="category_id" id="category_id" width="150px;">
+                                <select name="parent_id_edit" id="parent_id_edit" width="150px;">
 
                                     <option value="">No Parent Category</option>
                                     @foreach($parent as $parentid)
@@ -202,9 +202,9 @@ This NOT OK.
                 type: "GET",
                 url: "edit-category/" + id,
                 success: function(response) {
-                    console.log(response);
+                    // console.log(response);
                     if (response.status == 404) {
-                        console.log('error no. 404 edit');
+                        // console.log('error no. 404 edit');
 
                     } else {
                         $('#name').val(response.category.name);
@@ -212,7 +212,8 @@ This NOT OK.
                         if (response.category.status == 1) {
                             $("#categorystatus").prop("checked", true);
                         }
-                        $("#category_id").val(response.category.id);
+                        $('#parent_id_edit option').eq(response.category.parent_id).prop('selected', true);
+
 
                         //send the id
                         $('#editCategoryId').val(response.category.id);

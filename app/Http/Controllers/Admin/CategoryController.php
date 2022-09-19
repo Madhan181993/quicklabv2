@@ -57,7 +57,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-
+// dd($category);
         if ($category) {
             return response()->json([
                 'status' => '200',
