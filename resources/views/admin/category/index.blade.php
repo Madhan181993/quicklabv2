@@ -18,7 +18,9 @@
         height: 30px;
     }
 </style>
-
+@if (session('status'))
+    <div class="alert alert-success">{{ session('status') }}</div>
+@endif
 <h4>Category Page</h4>
 <div class="card">
     <div class="card-body">
@@ -34,11 +36,11 @@
                 </tr>
             </thead>
             <tbody>
-@if($parent)
+<!-- @if($parent)
 This is ok.
 @else
 This NOT OK.
-@endif
+@endif -->
 
                 @foreach($categories as $category)
                 <tr>
@@ -137,7 +139,7 @@ This NOT OK.
                     <div class="card-body">
                         <form id="editFormId" enctype="multipart/form-data">
                             @csrf
-                            <input type="text" id="editCategoryId">
+                            <input type="hidden" name="editCategoryId" id="editCategoryId" value="">
                             <div id="message_area"></div>
                             <!-- <div class="row"> -->
                             <div class="col-md-10  mb-2">
@@ -184,6 +186,10 @@ This NOT OK.
 @section('scripts')
 <script>
     $(document).ready(function() {
+
+        setTimeout(function() {
+            $('.alert-success').hide();
+        }, 2000); // <-- time in milliseconds
 
 
         $(document).on('click', '.editbtn', function(e) {
@@ -232,9 +238,9 @@ This NOT OK.
         e.preventDefault();
 
         var id = $('#editCategoryId').val();
-        console.log('id : ' + id);
+        //console.log('id : ' + id);
         var data = {
-            // 'id' : id,
+            'id' : id,
             'name': $('#name').val(),
             'parent_id': $('#parent_id').val(),
             'status': $('#categorystatus').val(),
@@ -247,24 +253,20 @@ This NOT OK.
         });
 
         $.ajax({
-            type: "PUT",
-            url: "update-category/"+id,
+            type: "POST",
+            url: "{{route('admin.update-category')}}",
             data: data,
             dataType: "json",
             success: function(response) {
-                // console.log(response);
-
+                console.log(response);
+                alert(response.status);
                 if (response.status == 400) {
                     console.log('error no. 400 - Update');
-
-                } else if (response.status = 404) {
+                } else if (response.status == 404) {
                     console.log(response);
                     console.log('error no. 404 udpate');
-
-
                 } else {
-
-                    console.log('error no. 200 udpate');
+                    //console.log('error no. 200 udpate');
                     $('#editCategoryrModal').modal('hide');
                 }
             }

@@ -32,7 +32,6 @@ class CategoryController extends Controller
 
     public function insert(Request $request)
     {
-// dd($request);
         //  Validate fields
         $this->validate($request, [
             'name' => 'required'
@@ -49,15 +48,12 @@ class CategoryController extends Controller
             'status' => $categorystatus,
         ]);
 
-
         return redirect('/admin/categories');
     }
 
     public function edit($id)
     {
         $category = Category::find($id);
-
-// dd($category);
         if ($category) {
             return response()->json([
                 'status' => '200',
@@ -70,15 +66,11 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-
-
-// dd($id);
-
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'categorystatus' => 'required',
+            //'status' => 'required',
         ]);
 
 
@@ -96,7 +88,7 @@ class CategoryController extends Controller
 
                 $category->name = $request->input('name');
                 $category->parent_id = $request->input('parent_id');
-                $category->categorystatus = $request->input('categorystatus');
+                $category->status = ($request->input('status') == "on") ? '1' : '0';
                 $category->update();
 
                 return response()->json([
