@@ -60,7 +60,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('users', 'Admin\UserController@index')->name('users');
         Route::post('add-user', 'Admin\UserController@addUser')->name('add-user');
         Route::post('edit-user', 'Admin\UserController@editUser')->name('edit-user');
-        Route::put('update-user', 'Admin\UserController@updateUser')->name('update-user');
+        Route::post('update-user', 'Admin\UserController@updateUser')->name('update-user');
         Route::post('delete-user', 'Admin\UserController@deleteUser')->name('delete-user');
 
         Route::get('settings',[SettingsController::class,'index'])->name('settings');
@@ -69,8 +69,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('tax', [TaxController::class,'index'])->name('tax');
         Route::post('insert-tax', [TaxController::class,'insert'])->name('insert-tax');
-
         Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
+        Route::Post('update-tax',[TaxController::class,'update'])->name('update-tax');
         
         // Product Management Routes
         Route::get('products', [ProductController::class,'index'])->name('products');

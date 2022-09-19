@@ -179,9 +179,9 @@ This NOT OK.
 
 
 
-@endsection
 
-@section('scripts')
+
+
 <script>
     $(document).ready(function() {
 
