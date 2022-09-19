@@ -51,7 +51,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('add-category',[CategoryController::class,'add']);
         Route::POST('insert-category',[CategoryController::class,'insert']);
         Route::get('edit-category/{id}', [CategoryController::class,'edit'])->name('edit-category');
-        Route::post('update-category', [CategoryController::class, 'update']);
+        Route::put('update-category/{id}', [CategoryController::class, 'update'])->name('update-category');
 
         Route::get('company-settings', 'Admin\CompanyController@index')->name('company-settings');
         Route::post('edit-company', 'Admin\CompanyController@editCompany')->name('edit-company');

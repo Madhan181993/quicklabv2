@@ -136,6 +136,7 @@ This NOT OK.
                 <div class="card">
                     <div class="card-body">
                         <form id="editFormId" enctype="multipart/form-data">
+                            @csrf
                             <input type="text" id="editCategoryId">
                             <div id="message_area"></div>
                             <!-- <div class="row"> -->
@@ -235,8 +236,8 @@ This NOT OK.
         var data = {
             // 'id' : id,
             'name': $('#name').val(),
-            'category_id': $('#category_id').val(),
-            'categorystatus': $('#categorystatus').val(),
+            'parent_id': $('#parent_id').val(),
+            'status': $('#categorystatus').val(),
         }
 
         $.ajaxSetup({
@@ -246,8 +247,8 @@ This NOT OK.
         });
 
         $.ajax({
-            type: "POST",
-            url: "update-category",
+            type: "PUT",
+            url: "update-category/"+id,
             data: data,
             dataType: "json",
             success: function(response) {
@@ -263,7 +264,7 @@ This NOT OK.
 
                 } else {
 
-
+                    console.log('error no. 200 udpate');
                     $('#editCategoryrModal').modal('hide');
                 }
             }

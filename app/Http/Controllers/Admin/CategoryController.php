@@ -70,8 +70,11 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
+
+
+// dd($id);
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
