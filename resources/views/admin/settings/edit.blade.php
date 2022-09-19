@@ -26,7 +26,7 @@ table.settings thead th {
 </style>
 
 <h4>Settings Management</h4>
-<form id="formSettingsUpdate" action="{{ Route('admin.settings-update') }}" Method="post">
+<form id="" action="{{ Route('admin.settings-update') }}" Method="post">
     @csrf
 <table class="table table-hover table-Settings">
 
@@ -54,7 +54,10 @@ table.settings thead th {
     @endforeach
        
     <tr><td colspan="4" style="background-color:#fff!important;padding-top:30px!important;">
-    <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr>
+    <!-- <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr> -->
+    <!-- <button type="submit" class="btn btn-primary button1"> Save Settings</button></td></tr> -->
+    <a href="{{ Route('admin.settings') }}" class="btn btn-primary button1"> Back</a></td></tr>
+    </tbody>
     </tbody>
 </table>
 </form>
