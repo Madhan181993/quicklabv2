@@ -258,8 +258,7 @@ This NOT OK.
             data: data,
             dataType: "json",
             success: function(response) {
-                console.log(response);
-                alert(response.status);
+               
                 if (response.status == 400) {
                     console.log('error no. 400 - Update');
                 } else if (response.status == 404) {
