@@ -12,11 +12,11 @@ class Tax extends Model
     protected $table = 'taxes';
 
     protected $fillable = [
-        'taxcodde',
+        'taxcode',
         'taxname',
         'taxvalue',
         'taxpercentage',
         'taxdescription',
-        'status',
+        'taxstatus',
     ];
 }

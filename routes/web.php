@@ -68,7 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('settings-update',[SettingsController::class,'update'])->name('settings-update');
 
         Route::get('tax', [TaxController::class,'index'])->name('tax');
-        Route::post('/insert-tax', [TaxController::class,'insert'])->name('insert-tax');
+        Route::post('insert-tax', [TaxController::class,'insert'])->name('insert-tax');
 
         Route::post('edit-tax/{id}', [TaxController::class,'edit'])->name('edit-tax');
         

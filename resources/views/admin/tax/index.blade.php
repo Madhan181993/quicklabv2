@@ -32,10 +32,11 @@
                     <td>{{ $item->id }}</td>
                     <td>{{ $item->taxname }}</td>
                     <td>{{ $item->taxpercentage }}</td>
-                    <td>{{ $item->status }}</td>
-                    <!-- <td>
-                        <img src="{{ asset('assets/uploads/category/'.$item->image) }}" class="category-list-img" alt="Image Here">
-                    </td> -->
+                    @if ($item->taxstatus == 1)
+                    <td>Active</td>
+                    @else
+                    <td>InActive</td>
+                    @endif
                     <td>
                         <a href="{{ url('edit-tax').$item->id }}" data-toggle="tooltip" title="Edit"><i class="far fa-edit"></i></a>
                         <a href="#" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a>
@@ -69,7 +70,7 @@
             <div class="modal-body">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('insert-tax') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ Route('admin.insert-tax') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                             <div class="col-md-6  mb-2">
@@ -97,13 +98,13 @@
                                 </div>.
                                 <div class="col-md-4 mb-2">
                                     <label for="status" class="checkboxLabel" >Status&nbsp;&nbsp;
-                                        <input type="checkbox" class="form-control" name="taxstatus"></label>
+                                        <input type="checkbox" class="form-control" name="taxstatus" checked></label>
                                 </div>
 
                                 <div class="col-md-12 ">
                                     
-                                    <button type="submit" class="btn btn-primary add-btn">Add</button>
-                                    <button class="btn btn-secondary popup-btn"  data-dismiss="modal">Close</button>
+                                    <button class="btn btn-secondary "  data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary add-btn popup-btn">Add</button>
                                 </div>
                             </div>
                         </form>
