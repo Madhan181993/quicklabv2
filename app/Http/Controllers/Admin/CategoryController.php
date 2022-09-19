@@ -17,11 +17,11 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $parent = Category::where('category_id', '=', NULL)->get();
-        $category = Category::all();
-
+        $parent = Category::where('parent_id', '=', NULL)->get();
+        $categories = Category::all();
+        // dd($parent);
         return view('admin.category.index')
-            ->with(compact('category'))
+            ->with(compact('categories'))
             ->with(compact('parent'));
     }
 
@@ -32,16 +32,21 @@ class CategoryController extends Controller
 
     public function insert(Request $request)
     {
-
+// dd($request);
         //  Validate fields
         $this->validate($request, [
             'name' => 'required'
         ]);
 
+        $categorystatus = 0;
 
+        if($request->categorystatus == 'on'){
+            $categorystatus = 1;
+        }
         Category::insert([
             'name' =>  $request->name,
-            'category_id' => $request->category_id
+            'parent_id' => $request->parent_id,
+            'status' => $categorystatus,
         ]);
 
 
@@ -85,9 +90,9 @@ class CategoryController extends Controller
             $category = Category::find($id);
 
             if ($category) {
-                
+
                 $category->name = $request->input('name');
-                $category->category_id = $request->input('category_id');
+                $category->parent_id = $request->input('parent_id');
                 $category->categorystatus = $request->input('categorystatus');
                 $category->update();
 
@@ -99,8 +104,6 @@ class CategoryController extends Controller
                     'status' => '404',
                 ]);
             }
-         }
-
-
+        }
     }
 }

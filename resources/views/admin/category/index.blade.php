@@ -34,21 +34,27 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($category as $item)
+@if($parent)
+This is ok.
+@else
+This NOT OK.
+@endif
+
+                @foreach($categories as $category)
                 <tr>
-                    <td>{{ $item->id }}</td>
-                    <td>{{ $item->name }}</td>
+                    <td>{{ $category->id }}</td>
+                    <td>{{ $category->name }}</td>
                     <td>
-                        @if($item->category_id)
-                        {{ $item->parent->name }}
+                        @if($category->parent_id)
+                        {{ $category->parent->name }}
                         @else
                         No Parent
                         @endif
                     </td>
-                    <td>{{ ($item->categorystatus == 1  ? "Active" : "Inactive" ) }}</td>
+                    <td>{{ ($category->status == 1  ? "Active" : "Inactive" ) }}</td>
 
                     <td>
-                        <button href="" value="{{ $item->id }}" class="editbtn"><i class="far fa-edit"></i></button>
+                        <button href="" value="{{ $category->id }}" class="editbtn"><i class="far fa-edit"></i></button>
                         <button href="#" data-toggle="tooltip" title="Delete" class="deletebtn"><i class="far fa-trash-alt"></i></button>
                         <!-- <button data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></button> -->
                         <a href=""></a>
@@ -60,8 +66,6 @@
 
     </div>
 </div>
-
-
 
 <!-- Modal for Add Category -->
 <div class="modal fade" id="AddCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -86,7 +90,7 @@
                             </div>
                             <div class="col-md-10 mb-2">
                                 <label for="parentcategory">Parent Category</label>
-                                <select name="category_id" width="150px;">
+                                <select name="parent_id" width="150px;">
 
                                     <option value="">No Parent Category</option>
                                     @foreach($parent as $parentid)
@@ -107,12 +111,8 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
+
     </div>
-</div>
 </div>
 <!-- End Modal for Add Category -->
 
@@ -169,15 +169,14 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div> -->
+
     </div>
 </div>
-</div>
+
 
 <!-- End Modal for Edit Category -->
+
+
 
 @endsection
 
@@ -246,7 +245,7 @@
         });
 
         $.ajax({
-            type:"POST",
+            type: "POST",
             url: "update-category",
             data: data,
             dataType: "json",

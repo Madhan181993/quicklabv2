@@ -46,13 +46,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::post('/logout',[UserController::class,'logout'])->name('logout');
 
-        // Route::get('categories', [CategoryController::class,'index']);
 
         Route::get('categories', [CategoryController::class,'index']);
         Route::get('add-category',[CategoryController::class,'add']);
         Route::POST('insert-category',[CategoryController::class,'insert']);
-        // Route::get('edit-category/{id}', [CategoryController::class, 'edit-category']);
-        // Route::get('edit-category', 'Admin\CategoryController@editCategory', 'edit-category');
         Route::get('edit-category/{id}', [CategoryController::class,'edit'])->name('edit-category');
         Route::post('update-category', [CategoryController::class, 'update']);
 
