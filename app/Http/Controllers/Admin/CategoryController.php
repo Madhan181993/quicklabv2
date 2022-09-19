@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 
 
@@ -20,10 +21,9 @@ class CategoryController extends Controller
         $category = Category::all();
 
         return view('admin.category.index')
-        ->with(compact('category'))
-        ->with(compact('parent'));
+            ->with(compact('category'))
+            ->with(compact('parent'));
     }
-
 
     public function add()
     {
@@ -45,52 +45,62 @@ class CategoryController extends Controller
         ]);
 
 
-        return redirect('/admin/categories')->with('status', 'Category Added Successfully');
+        return redirect('/admin/categories');
     }
 
     public function edit($id)
     {
         $category = Category::find($id);
-        // return view('admin.category.edit', compact('category'));
-        return response()->json([
-            'status' => 200,
-            'category' => $category,
-        ]);
+
+
+        if ($category) {
+            return response()->json([
+                'status' => '200',
+                'category' => $category,
+            ]);
+        } else {
+            return response()->json([
+                'status' => '404',
+            ]);
+        }
     }
 
     public function update(Request $request)
     {
 
-        $studentId = $request->input('category_id');
-        $category = Category::find($studentId);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'categorystatus' => 'required',
+        ]);
 
-        // TODO : Check whether image is required for Category. If not, remove the commented code below.
-        if ($request->hasFile('image')) {
-            $path = 'assets/uploads/category/' . $category->image;
 
-            if (File::exists($path)) {
-                File::delete($path);
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => '400',
+            ]);
+        } else {
+
+            $id = $request->input('id');
+
+            $category = Category::find($id);
+
+            if ($category) {
+                
+                $category->name = $request->input('name');
+                $category->category_id = $request->input('category_id');
+                $category->categorystatus = $request->input('categorystatus');
+                $category->update();
+
+                return response()->json([
+                    'status' => '200',
+                ]);
+            } else {
+                return response()->json([
+                    'status' => '404',
+                ]);
             }
+         }
 
-            $file = $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $ext;
 
-            $file->move('assets/uploads/category', $filename);
-            $category->image = $filename;
-            Log::info($filename);
-        }
-
-        $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
-        $category->description = $request->input('description');
-        $category->status = $request->input('status') == TRUE ? '1' : '0';
-        $category->popular = $request->input('popular') == TRUE ? '1' : '0';
-        $category->meta_title = $request->input('meta_title');
-        $category->meta_keywords = $request->input('meta_keywords');
-        $category->meta_description = $request->input('meta_description');
-        $category->update();
-
-        return redirect()->back()->with('status', 'Category Updated Successfully');
     }
 }
