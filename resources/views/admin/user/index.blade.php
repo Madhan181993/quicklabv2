@@ -200,7 +200,7 @@
                     <div class="card-body">
                         <form action="{{ url('admin/update-user') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
+                            @method('POST')
                             <input type="hidden" name="user_id" id="user_id" />
                             <div class="row">
                                 <div class="col-md-6  mb-2">

@@ -59,7 +59,7 @@ class ProductController extends Controller
             'stock_status' => $request->stock_status,
             'featured' => $request->featured,
             'quantity' => $request->quantity,
-            'category_id' => $request->category_id,
+            'parent_id' => $request->parent_id,
 
         );
         if($request->hasFile('image')){
@@ -80,7 +80,7 @@ class ProductController extends Controller
     {
         $id = $request->id;
         $product = Product::findOrFail($id);
-        $categories = Category::where('category_id', '=', NULL)->get();
+        $categories = Category::where('parent_id', '=', NULL)->get();
         return view('admin.product.edit',compact('product','categories'));
     }
 
