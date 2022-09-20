@@ -37,7 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::prefix('admin')->name('admin.')->group(function(){
 
 
-    Route::view('/login','admin.user.login')->name('login');
+    Route::view('/login','admin.user.login')->name('admin.login');
     Route::post('/login',[UserController::class,'login'])->name('login');
     
     Route::middleware(['auth:admin'])->group(function(){
