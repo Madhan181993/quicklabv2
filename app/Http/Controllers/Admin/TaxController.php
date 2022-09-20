@@ -59,20 +59,30 @@ class TaxController extends Controller
     public function update(Request $request)
     {
 
-
         // $taxId = $request->input('id');
-        $taxId = $request->editTaxId;
+        $taxId = $request->id;
         $TaxModel = Tax::find($taxId);
 
-        $TaxModel->taxcode = $request->edittaxcode;
-        $TaxModel->taxname = $request->edittaxname;
-        $TaxModel->taxvalue = $request->edittaxvalue;
-        $TaxModel->taxpercentage = $request->edittaxpercentage;
-        $TaxModel->taxdescription = $request->edittaxdescription;
-        $TaxModel->taxstatus = $request->edittaxstatus;
+        if(!empty($taxId)){
 
-        $TaxModel->update();
+            $TaxModel->taxcode = $request->taxcode;
+            $TaxModel->taxname = $request->taxname;
+            $TaxModel->taxvalue = $request->taxvalue;
+            $TaxModel->taxpercentage = $request->taxpercentage;
+            $TaxModel->taxdescription = $request->taxdescription;
+            $TaxModel->taxstatus = ($request->taxstatus == "on") ? "1" : "0";
 
-        return redirect('admin/tax')->with('status', 'Product Updated Successfully');
+            $TaxModel->update();
+
+            return response()->json([
+                'status' => '200',
+            ]);
+        }else{
+            return response()->json([
+                'status' => '404',
+            ]);
+        }
+
+        
     }
 }

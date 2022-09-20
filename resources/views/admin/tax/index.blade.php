@@ -93,7 +93,7 @@
                                 <div class="col-md-12 mb-2">
                                     <label for="">Tax Description</label>
                                     <textarea name="taxdescription" rows="3" class="form-control"></textarea>
-                                </div>.
+                                </div>
                                 <div class="col-md-4 mb-2">
                                     <label for="status" class="checkboxLabel">Status&nbsp;&nbsp;
                                         <input type="checkbox" class="form-control" name="taxstatus" checked></label>
@@ -134,7 +134,7 @@
                     <div class="card-body">
                         <form enctype="multipart/form-data">
                             @csrf
-                            <input type="text" id="editTaxId">
+                            <input type="hidden" name="editTaxId" id="editTaxId" value="">
                             <div class="row">
                                 <div class="col-md-6  mb-2">
                                     <label for="">Tax Code</label>
@@ -243,8 +243,8 @@
         var data = {
             'id' : $('#editTaxId').val(),
             'taxname': $('#edittaxname').val(),
-            'taxcode': $('#exittaxcode').val(),
-            'taxvalue': $('#edittxtvalue').val(),
+            'taxcode': $('#edittaxcode').val(),
+            'taxvalue': $('#edittaxvalue').val(),
             'taxpercentage': $('#edittaxpercentage').val(),
             'taxdescription': $('#edittaxdescription').val(),
             'taxstatus': $('#edittaxstatus').val(),
